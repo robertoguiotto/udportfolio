@@ -475,7 +475,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   for (var i = numberOfEntries - 1; i > numberOfEntries - 11; i--) {
     sum = sum + times[i].duration;
   }
-  console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
+ console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
@@ -484,17 +484,18 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 
 function updatePositions() {
+    frame++;
   window.performance.mark("mark_start_frame");
     // using getElementsByClassName instead of querySelectorAll, and removing the dot
     var items = document.getElementsByClassName('mover');
-    var itemsLenght = items.length;
+    var itemsLength = items.length;
     var scrollTopPosition = (document.body.scrollTop / 1250);
-    for (var i = 0; i < itemsLenght; i++) {
+    for (var i = 0; i < itemsLength; i++) {
       items[i].phaseCalculator = Math.sin(scrollTopPosition + (i % 5));
       items[i].scrollCalculator = ((items[i].basicLeft + 100 * items[i].phaseCalculator) - 1024);
     }
 
-    for (var i = 0; i < itemsLenght; i++) {
+    for (var i = 0; i < itemsLength; i++) {
       items[i].style.transform = 'translateX(' + items[i].scrollCalculator + 'px' + ')';
     }
  // adding log in order to determine which variables could be moved outside the loop
